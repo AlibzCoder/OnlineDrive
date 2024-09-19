@@ -1,0 +1,395 @@
+@import "spacing.scss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --lightBg: #d8d8d8;
+  --primaryColor: #f44336;
+  --primaryLightColor: #ff5252;
+  --gray: #bdbdbd;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+    --lightBg: #2c2c2c;
+  }
+}
+
+html,
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  background-color: #2d3436;
+  background-image: linear-gradient(315deg, #2d3436 0%, #000000 74%);
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}
+
+.w-full {
+  width: 100%;
+}
+
+.h-full {
+  height: 100%;
+}
+
+h1 {
+  font-size: 48px;
+  line-height: 60px;
+}
+
+h2 {
+  font-size: 36px;
+  line-height: 48px;
+}
+
+h3 {
+  font-size: 30px;
+  line-height: 40px;
+}
+
+h4 {
+  font-size: 24px;
+  line-height: 36px;
+}
+
+h5 {
+  font-size: 18px;
+  line-height: 24px;
+}
+
+h6 {
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.btn {
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.3s;
+  &.btn-circle {
+    border-radius: 50%;
+  }
+  &.btn-square {
+    border-radius: 0;
+  }
+  &.btn-bordered {
+    border: 1px solid var(--primaryColor);
+  }
+  &.btn-round {
+    border-radius: 0.5em;
+  }
+  &.btn-secondary {
+    border: none;
+    background-color: transparent;
+  }
+  &.text-sm {
+    padding: 0.5rem;
+    margin: 0.35rem;
+  }
+  &.text-base {
+    padding: 0.75rem;
+    margin: 0.55rem;
+  }
+  &.text-lg {
+    padding: 1rem;
+    margin: 0.8rem;
+  }
+  &.text-xl {
+    padding: 1.25rem;
+    margin: 1.05rem;
+  }
+  &.btn-fixed-size {
+    &.text-sm {
+      width: 28px;
+      height: 28px;
+    }
+    &.text-base {
+      width: 32px;
+      height: 32px;
+    }
+    &.text-lg {
+      width: 36px;
+      height: 36px;
+    }
+    &.text-xl {
+      width: 40px;
+      height: 40px;
+    }
+  }
+  &.btn-active:not(.btn-primary),
+  &:not(.btn-primary):hover,
+  &:not(.btn-primary):active {
+    color: var(--primaryColor);
+  }
+  &.btn-primary {
+    color: #fff;
+    background-color: var(--primaryColor);
+  }
+  &.btn-bold {
+    font-weight: 700;
+  }
+}
+
+.hidden {
+  display: none;
+}
+.invisible {
+  visibility: hidden;
+}
+.visible {
+  visibility: visible;
+}
+.opacity-100 {
+  opacity: 1;
+}
+.opacity-0 {
+  opacity: 0;
+}
+
+.d-flex {
+  display: flex;
+}
+.justify-center {
+  justify-content: center;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.justify-around {
+  justify-content: space-around;
+}
+.justify-evenly {
+  justify-content: space-evenly;
+}
+.items-center {
+  align-items: center;
+}
+.items-baseline {
+  align-items: baseline;
+}
+.items-end {
+  align-items: flex-end;
+}
+.items-start {
+  align-items: flex-start;
+}
+.flex-grow {
+  flex-grow: 1;
+}
+.flex-shrink {
+  flex-shrink: 1;
+}
+.flex-column{
+  flex-direction: column;
+}
+
+.card {
+  background-color: var(--lightBg);
+  border-radius: 1em;
+  padding: 1em;
+}
+
+.form-input-box {
+  padding: 0.75em 0;
+  .form-input {
+    border: 1px solid var(--gray);
+    border-radius: 0.25rem;
+    height: 2.875rem;
+    padding: 0.4rem 0.75rem;
+    transition: border 0.3s;
+    background-color: var(--lightBg);
+
+    input {
+      height: 100%;
+      outline: none;
+      box-shadow: none;
+      border: none;
+      font-size: 0.9em;
+      background-color: transparent;
+    }
+    &:focus-within {
+      border-color: var(--primaryColor);
+    }
+  }
+  .form-input-label {
+    margin-bottom: 0.5em;
+    font-size: 0.85em;
+  }
+  .form-input-error {
+    margin-top: 0.5em;
+    font-size: 0.75em;
+  }
+  .form-input-optional-label {
+    opacity: 0.65;
+    margin: 0 0.5em;
+    font-size: 0.65em;
+  }
+  &.form-input-invalid {
+    .form-input {
+      border-color: var(--primaryColor);
+    }
+  }
+}
+
+input[type="radio"] {
+  -webkit-appearance: none;
+  appearance: none;
+  //background-color:#00bfa5;
+  margin: 0;
+  font: inherit;
+  color: currentColor;
+  width: 1.15em;
+  height: 1.15em;
+  border: 0.1em solid currentColor;
+  border-radius: 50%;
+  transform: translateY(-0.075em);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+input[type="radio"]::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  border-radius: 50%;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--primaryColor);
+}
+
+input[type="radio"]:checked::before {
+  transform: scale(1);
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px var(--lightBg) inset !important;
+}
+
+.scrollable {
+  padding-right: 0.5rem;
+  /* width */
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: var(--primaryLightColor);
+    border-radius: 16px;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--primaryColor);
+  }
+}
+
+.lds-ellipsis {
+  /* change color here */
+  color: var(--primaryLightColor);
+}
+.lds-ellipsis,
+.lds-ellipsis div {
+  box-sizing: border-box;
+}
+.lds-ellipsis {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  width: 80px;
+  height: 8px;
+}
+.lds-ellipsis div {
+  position: absolute;
+  width: 13.33333px;
+  height: 13.33333px;
+  border-radius: 50%;
+  background: currentColor;
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.lds-ellipsis div:nth-child(1) {
+  left: 8px;
+  animation: lds-ellipsis1 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(2) {
+  left: 8px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(3) {
+  left: 32px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(4) {
+  left: 56px;
+  animation: lds-ellipsis3 0.6s infinite;
+}
+@keyframes lds-ellipsis1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes lds-ellipsis3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes lds-ellipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(24px, 0);
+  }
+}
+
+.login-page, .signup-page{
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  .card {
+    width: 35vw;
+    padding: 1em 2em;
+  }
+}
+
+
