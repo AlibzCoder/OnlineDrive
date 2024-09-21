@@ -1,0 +1,6 @@
+HTML,CSS, JS, SCSS, Less, ReactJS, PWA, SPA, NextJS, Redux, socketio, Axios, State Management , Jest, Cypress,
+Styled Components, Material UI, Ant Design, Tailwind, React Router, redux-thunk , react-query, SWR, vitest, vite, webpack,
+Microfrontend, module federation, HOC, TDD, Facade, SOLID, Flux, Service Workers, Web Applications
+git, Azure, DevOps, MongoDB, Docker,
+
+

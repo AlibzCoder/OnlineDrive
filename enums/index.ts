@@ -1,4 +1,5 @@
 export enum AuthKeys {
     AUTHORIZATION = 'authorization',
-    REFRESH_TOKEN = 'refreshToken'
+    REFRESH_TOKEN = 'refreshToken',
+    AUTH_COOKIE = 'auth'
 }

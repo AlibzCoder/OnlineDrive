@@ -1,0 +1,91 @@
+.header {
+  width: 100%;
+  height: 4.5em;
+  padding: 1.25em;
+  background-color: var(--lightBg);
+  box-shadow: 0 0 45px 5px rgb(244 67 54 / 20%);
+}
+.main {
+  width: 100%;
+  height: 100%;
+  padding: 1.5em 1em;
+
+  .explorer {
+    height: 90%;
+    border-radius: 0.75em;
+    padding: 0;
+    display: grid;
+    grid-template-rows: 7.5% 92.5%;
+    .explorer-header {
+      border-bottom: 1.75px solid var(--background);
+    }
+    .explorer-content-wrapper {
+      display: grid;
+      grid-template-columns: 25% auto;
+        
+      .explorer-content {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        overflow-y: auto;
+        gap: 5%;
+        padding: 0.8vw;
+        .explorer-item {
+          cursor: pointer;
+          flex-basis: 6.5em;
+          height: 7.75em;
+          display: grid;
+          grid-template-rows: auto 10%;
+          gap: 5%;
+          .explorer-item-thumbnail {
+            position: relative;
+            border: 1px solid var(--grayLight);
+            background-color: var(--darkLightBg);
+            border-radius: 0.75em;
+            transition: border-color 0.3s;
+            > i {
+              font-size: 3.5em;
+            }
+
+            .explorer-item-menu {
+              width: 85%;
+              height: 0;
+              position: absolute;
+              top: 15%;
+              left: 7.5%;
+              z-index: -1;
+              opacity: 0;
+              transition: opacity 0.15s;
+              .more-menu-button {
+                font-size: 1.5em;
+                line-height: 0;
+                
+              }
+            }
+          }
+          &:hover,
+          &:focus,
+          &:active,
+          .explorer-item-selected{
+            .explorer-item-thumbnail {
+              border-color: var(--primaryLighterColor);
+              .explorer-item-menu {
+                z-index: 1;
+                opacity: 1;
+              }
+            }
+          }
+        }
+      }
+      .explorer-sidebar{
+        overflow-y: auto;
+        padding-right: 0.15em;
+        border-right: 1.75px solid var(--background);
+        
+        .collapsible-contianer{
+            background-color: var(--darkLightBg);
+        }
+      }
+    }
+  }
+}

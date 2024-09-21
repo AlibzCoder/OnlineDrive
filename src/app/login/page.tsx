@@ -1,5 +1,6 @@
 "use client";
-import { Routes } from "@/lib/const";
+import { callLogin } from "@/lib/api/auth.api";
+import { PageRoutes } from "@/lib/const";
 import Button from "@/src/components/Buttons/Button";
 import LinkButton from "@/src/components/Buttons/LinkButton";
 import Form from "@/src/components/Form/Form";
@@ -11,14 +12,25 @@ import { useRef, useState } from "react";
 export default function Login() {
   const router = useRouter();
 
+  const [isLoading, setIsLoading] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
-  const [formData, setFormData] = useState<object | any>({});
 
   function HandleSubmit(
     _e: Event | any,
     isValid: boolean,
     data: object | any
-  ) {}
+  ) {
+    if(isValid){
+      setIsLoading(true);
+      callLogin(data).then(()=>{
+        router.push(PageRoutes.HomePage);
+      }).catch((err)=>{
+        console.log(err)
+      }).finally(()=>{
+        setIsLoading(false);
+      })
+    }
+  }
 
   function Submit() {
     if (
@@ -58,13 +70,13 @@ export default function Login() {
             required={true}
           />
           <div className="w-full d-flex justify-center flex-column">
-            <Button className="w-full d-flex justify-center" onClick={Submit}>
+            <Button className="w-full d-flex justify-center" onClick={Submit} isLoading={isLoading}>
               Continue
             </Button>
             <LinkButton
               className="w-full d-flex justify-center m-0 p-1"
               onClick={() => {
-                router.push(Routes.SignUpPage);
+                router.push(PageRoutes.SignUpPage);
               }}
             >
               Already have an account, Go to Sign Up
