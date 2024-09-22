@@ -22,7 +22,7 @@
     .explorer-content-wrapper {
       display: grid;
       grid-template-columns: 25% auto;
-        
+
       .explorer-content {
         display: flex;
         flex-direction: row;
@@ -59,14 +59,13 @@
               .more-menu-button {
                 font-size: 1.5em;
                 line-height: 0;
-                
               }
             }
           }
           &:hover,
           &:focus,
           &:active,
-          .explorer-item-selected{
+          .explorer-item-selected {
             .explorer-item-thumbnail {
               border-color: var(--primaryLighterColor);
               .explorer-item-menu {
@@ -77,13 +76,34 @@
           }
         }
       }
-      .explorer-sidebar{
+      .explorer-sidebar {
         overflow-y: auto;
         padding-right: 0.15em;
         border-right: 1.75px solid var(--background);
-        
-        .collapsible-contianer{
-            background-color: var(--darkLightBg);
+
+        .collapsible-contianer {
+          background-color: var(--darkLightBg);
+          
+          .collapsible-content{
+            overflow: visible;
+          }
+          .explorer-item-menu {
+            flex-grow: 1;
+            margin: 0 0.75em;
+            display: flex;
+            justify-content: flex-end;
+            position: relative;
+            button{
+              font-size: 1.25em;
+              .more-menu-item {
+                font-size: 1.5em;
+              }
+            }
+          }
+        }
+        .add-folder-modal{
+          width: 50vw;
+          min-height: 50vh;
         }
       }
     }

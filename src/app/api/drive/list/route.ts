@@ -16,12 +16,12 @@ async function handler(req: AuthorizedRequest) {
     const url = new URL(req.url)
     const dirIdParam = url.searchParams.get("dirId");
     let dirId = dirIdParam ? new mongoose.Types.ObjectId(String(dirIdParam)) : null
-
+    let userRootDir;
     const user = await getUserByAuthPayloadOrUserName(req);
     
     if (IsEmpty(dirId)) {
       try {
-        const userRootDir = await GetUserDirectoryByIdOrName(
+        userRootDir = await GetUserDirectoryByIdOrName(
           user,
           null,
           String(user.id)
@@ -46,7 +46,7 @@ async function handler(req: AuthorizedRequest) {
         user: user.id,
         dirId: dirId
       });
-      const _dirs: File[] = [];
+      const _dirs: File[] = userRootDir ? [FileDBDocToJson(userRootDir)] : [];
       dirs.forEach((file: File) => {
         _dirs.push(FileDBDocToJson(file));
       });

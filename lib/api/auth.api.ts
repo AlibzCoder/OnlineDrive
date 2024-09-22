@@ -1,7 +1,6 @@
 
 import httpApi from '@/lib/api';
 import { APIRoutes } from '../const';
-import { User } from '@/types/models';
 import { ClientLoginRequest, ClientLoginResponse, ClientSignUpRequest, ClientSignUpResponse } from '@/types/api';
 
 export const callLogin = (loginPayload: ClientLoginRequest): Promise<ClientLoginResponse> =>

@@ -6,7 +6,8 @@ import { IsEmpty, IsObj } from "@/util";
 
 export function getUserByAuthPayloadOrUserName(
   request: AuthorizedRequest,
-  username: string | null = null
+  username: string | null = null,
+  formatData: boolean | undefined = true
 ): Promise<User> {
   return new Promise((res, rej) => {
     const TokenPayload = JSON.parse(
@@ -22,7 +23,7 @@ export function getUserByAuthPayloadOrUserName(
     UserDBSchema.findOne({ username: username })
       .then((user: User | any) => {
         if (!user) return rej(USER_NOTFOUND_ERROR);
-        res(UserDBDocToJson(user));
+        res(formatData ? UserDBDocToJson(user) : user);
       })
       .catch((e) => rej(INTERNAL_ERROR));
   });

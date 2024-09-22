@@ -471,6 +471,10 @@ input:-webkit-autofill:active {
   background: linear-gradient(-75deg, var(--lightBg), #444, var(--lightBg));
   background-size: 400% 400%;
   animation: skeleton 1.6s ease infinite;
+
+  > * {
+    visibility: hidden;
+  }
 }
 
 @-webkit-keyframes skeleton {
@@ -500,6 +504,34 @@ input:-webkit-autofill:active {
     background-position: 0% 50%;
   }
 }
+
+
+.modal, .modal-overlay{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: all .3s ease-in-out;
+  &.modal-visible{
+    opacity: 1;
+  }
+}
+.modal{
+  z-index: -100;
+  &.modal-visible{
+    z-index: 1000000;
+  }
+}
+.modal-overlay {
+  z-index: -1;
+  background: rgb(47 25 25 / 60%);
+  backdrop-filter: blur(2.5px);
+}
+
 
 .more-menu-button {
   cursor: pointer;
@@ -561,11 +593,14 @@ input:-webkit-autofill:active {
   }
   .collapsible-content{
     max-height: 0px;
-    transform: all .3s;
+    transform: all .3s .1s;
     overflow: hidden;
     transition: max-height 0.15s ease-in-out, margin-top 0.15s ease-in-out, opacity 0.15s ease-in-out;
     opacity: 0;
     padding-left: 0.5em;
+    &,.collapsible-contianer{
+      display: none;
+    }
   }
   input[type="checkbox"]:checked ~ .collapsible-label{
     > i{
@@ -577,10 +612,16 @@ input:-webkit-autofill:active {
     max-height: 1000px;
     margin-top: 0.5em;
     opacity: 1;
+    &,.collapsible-contianer{
+      display: block;
+    }
   }
 }
 
-
+.select-file {
+  border: 1px solid currentColor;
+  border-radius: 0.5em;
+}
 
 .page,
 .login-page,
