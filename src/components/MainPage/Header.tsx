@@ -15,13 +15,6 @@ const Header = () => {
     data: currentUser,
   } = useGetUserInfoQuery();
 
-  const currentExplorerRoute = useAppSelector((store) => store.explorer.currentExplorerRoute)
-
-  useEffect(()=>{
-    if(currentUser && !IsEmpty(currentUser.id) && IsEmpty(currentExplorerRoute)){
-      dispatch(setCurrentExplorerRoute(currentUser.id))
-    }
-  },[currentUser, currentExplorerRoute])
 
   return (
     <div className={`header ${isLoadingCurrentUserInfo ? "skeleton" : ""}`}>

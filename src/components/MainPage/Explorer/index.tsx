@@ -1,7 +1,11 @@
 "use client";
 
+import { useAppSelector } from "@/util/Hooks";
 import Modal from "../../Modal";
 import ExplorerSideBar from "./ExplorerSidebar";
+import { useMemo, useState } from "react";
+import { IsArray } from "@/util";
+import ExplorerContent from "./ExplorerContent";
 
 const extentionsIcons = {
   folder: "fa-folder",
@@ -42,60 +46,12 @@ const extentionsIcons = {
 
 const Explorer = () => {
 
-  
-  
-
   return (
     <div className="explorer card">
       <div className="explorer-header d-flex items-center px-2">Files</div>
       <div className="explorer-content-wrapper">
         <ExplorerSideBar />
-        <div className="explorer-content scrollable">
-          {Object.keys(extentionsIcons).map((i, k) => (
-            <div className="explorer-item" key={k} tabIndex={-1}>
-              <div className="explorer-item-thumbnail d-flex items-center justify-center">
-                <i
-                  className={`fal ${
-                    extentionsIcons[i as keyof typeof extentionsIcons]
-                  }`}
-                ></i>
-                <div className="explorer-item-menu d-flex justify-between items-center">
-                  <div className="checkbox-wrapper">
-                    <div className="round">
-                      <input
-                        type="checkbox"
-                        name="files"
-                        id={`checkbox-${i}`}
-                        value={i}
-                      />
-                      <label htmlFor={`checkbox-${i}`}></label>
-                    </div>
-                  </div>
-                  <button className="more-menu-button" type="button">
-                    <i className="fal fa-ellipsis-h"></i>
-                    <div className="more-menu-container">
-                      <div className="more-menu-item items-center justify-start">
-                        <i className="fal fa-pen"></i>
-                        <span>Rename</span>
-                      </div>
-                      <div className="more-menu-item items-center justify-start">
-                        <i className="fal fa-arrow-to-bottom"></i>
-                        <span>Download</span>
-                      </div>
-                      <div className="more-menu-item items-center justify-start">
-                        <i className="fal fa-trash"></i>
-                        <span>Delete</span>
-                      </div>
-                    </div>
-                  </button>
-                </div>
-              </div>
-              <div className="explorer-item-name d-flex items-center justify-center">
-                Folder
-              </div>
-            </div>
-          ))}
-        </div>
+        <ExplorerContent />
       </div>
     </div>
   );
