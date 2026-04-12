@@ -8,7 +8,7 @@ import {
   UnAuthorizedPageRoutes,
 } from "@/lib/const";
 import { NextResponse } from "next/server";
-import { AuthorizedRequest, AuthorizedResponse } from "@/types/api";
+import { AuthorizedRequest } from "@/types/api";
 import {
   GetClientAuthCookie,
   isAuthenticatedRequest,
@@ -17,7 +17,6 @@ import {
 
 export async function middleware(
   req: AuthorizedRequest,
-  res: AuthorizedResponse
 ) {
   const path = req.nextUrl.pathname;
   const isUnProtectedRoute =
@@ -41,7 +40,7 @@ export async function middleware(
         try {
           await ResponseWithNewAuthCredentials(response, refreshToken || "");
           return response;
-        } catch (_e) {
+        } catch {
           if (path.startsWith("/api")) {
             return NextResponse.json(UNAUTHORIZED_ERROR, { status: 401 });
           } else {

@@ -21,15 +21,18 @@ export function getUserByAuthPayloadOrUserName(
       username = TokenPayload?.username;
 
     UserDBSchema.findOne({ username: username })
-      .then((user: User | any) => {
+      .then((user: User | null) => {
         if (!user) return rej(USER_NOTFOUND_ERROR);
         res(formatData ? UserDBDocToJson(user) : user);
       })
-      .catch((e) => rej(INTERNAL_ERROR));
+      .catch(() => rej(INTERNAL_ERROR));
   });
 }
-export function UserDBDocToJson(user: User | any) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function UserDBDocToJson(user: any): User {
   if (user?.toJSON) user = user.toJSON();
-  const { _id, __v, password, ...UserExcludedFields } = user;
-  return Object.assign({ id: _id }, UserExcludedFields);
+  const { _id, ...rest } = user;
+  delete rest.__v;
+  delete rest.password;
+  return Object.assign({ id: _id }, rest);
 }

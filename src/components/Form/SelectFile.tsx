@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 
 
-const SelectFile = (props: any) => {
+const SelectFile = (props: { name: string; key?: string }) => {
   const input = useRef<HTMLInputElement>(null);
   const [fileInfo, setFileInfo] = useState<string | null>(null);
   const { name, key } = props;

@@ -24,12 +24,12 @@ const onResponse = (res: AxiosResponse) => {
   return res;
 };
 
-const onError = async (err: AxiosError | any) => {
+const onError = async (err: AxiosError & { response: AxiosResponse }) => {
   const responseData = err.response.data;
   const errorMessages : string[] = [];
   if(responseData && responseData?.data?.message) errorMessages.push(responseData?.data?.message); // defined errors
   if(responseData && IsArray(responseData)){ // validation errors
-    responseData.forEach((item: object | any)=>{
+    responseData.forEach((item: { message?: string })=>{
       if(item?.message) errorMessages.push(item?.message)
     })
   }

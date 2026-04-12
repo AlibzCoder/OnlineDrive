@@ -1,17 +1,10 @@
 "use client";
 
 import { useGetUserInfoQuery } from "@/lib/api/createApiReducer";
-import { setCurrentExplorerRoute, setVisibleFiles } from "@/lib/store/slices/explorerSlice";
-import { IsEmpty } from "@/util";
-import { useAppSelector } from "@/util/Hooks";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 
 const Header = () => {
-  const dispatch = useDispatch();
   const {
     isLoading: isLoadingCurrentUserInfo,
-    refetch: refetchCurrentUserInfo,
     data: currentUser,
   } = useGetUserInfoQuery();
 

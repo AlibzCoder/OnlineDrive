@@ -15,24 +15,24 @@ export const GetFilesByDirectory = (
 export const CreateNewDirectory = (
   dirName: string,
   parentDirId: string | null
-): Promise<any> =>
+): Promise<unknown> =>
   httpApi
-    .post<any>(APIRoutes.CreateNewDirectory, {
+    .post(APIRoutes.CreateNewDirectory, {
       name: dirName,
       dirId: parentDirId,
     })
     .then(({ data }) => data);
 
-export const UploadFileToDirectory = (formData: FormData): Promise<any> =>
-  httpApi<any>({
+export const UploadFileToDirectory = (formData: FormData): Promise<unknown> =>
+  httpApi({
     method: "post",
     url: APIRoutes.UploadFileToDirectory,
     data: formData,
     headers: { "Content-Type": "multipart/form-data" },
   }).then(({ data }) => data);
 
-export const DeleteFile = (id: string): Promise<any> =>
-  httpApi<any>({
+export const DeleteFile = (id: string): Promise<unknown> =>
+  httpApi({
     method: "post",
     url: `${APIRoutes.DeleteFile}?id=${id}`,
   }).then(({ data }) => data);

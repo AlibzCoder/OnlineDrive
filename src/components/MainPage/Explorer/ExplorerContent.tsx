@@ -1,9 +1,7 @@
 "use client";
 
 import { useAppSelector } from "@/util/Hooks";
-import Modal from "../../Modal";
-import ExplorerSideBar from "./ExplorerSidebar";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { IsArray, IsEmpty } from "@/util";
 import { RecurciveFileItem } from "@/types";
 import NoFiles from "./NoFIles";
@@ -53,7 +51,7 @@ const ExplorerContentItem = (props: { item: RecurciveFileItem }) => {
     let ext = type === "file" ? `${extention}` : "folder";
     if (ext.charAt(0) === ".") ext = ext.substring(1, ext.length);
     return ext;
-  }, [extention]);
+  }, [extention, type]);
   const icon = extentionsIcons[cleanedExtention as keyof typeof extentionsIcons]
     ? extentionsIcons[cleanedExtention as keyof typeof extentionsIcons]
     : extentionsIcons.other;
@@ -123,6 +121,7 @@ const ExplorerContent = () => {
       );
     }
     return [];
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [type, visibleFiles, id]);
   const FoldersList = useMemo(
     () =>
@@ -133,11 +132,11 @@ const ExplorerContent = () => {
   const isEmpty = FilesList.length === 0 && FoldersList.length === 0;
   return (
     <div className="explorer-content scrollable">
-      {FoldersList.map((item) => (
-        <ExplorerContentItem item={item} />
+      {FoldersList.map((item: RecurciveFileItem) => (
+        <ExplorerContentItem key={item.id} item={item} />
       ))}
-      {FilesList.map((item) => (
-        <ExplorerContentItem item={item} />
+      {FilesList.map((item: RecurciveFileItem) => (
+        <ExplorerContentItem key={item.id} item={item} />
       ))}
         {isEmpty ? <NoFiles /> : <></>}
     </div>

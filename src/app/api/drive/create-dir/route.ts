@@ -1,7 +1,7 @@
 import { INTERNAL_ERROR } from "@/lib/const";
 import DBConnect from "@/lib/mongo";
 import { CreateDirSchema } from "@/schemas/validators/file";
-import { AuthorizedRequest, AuthorizedResponse } from "@/types/api";
+import { AuthorizedRequest } from "@/types/api";
 import vine, { errors } from "@vinejs/vine";
 import { NextResponse } from "next/server";
 import { getUserByAuthPayloadOrUserName } from "../../auth/util";
@@ -10,9 +10,9 @@ import { IsEmpty } from "@/util";
 import { GetUserDirectoryByIdOrName } from "@/util/upload";
 import FileDBSchema from "@/schemas/db/file";
 import path from "path";
-import { existsSync, mkdirSync, writeFile } from "fs";
+import { existsSync, mkdirSync } from "fs";
 
-async function handler(req: AuthorizedRequest, res: AuthorizedResponse) {
+async function handler(req: AuthorizedRequest) {
   try {
     await DBConnect();
     const body = await req.json();
@@ -71,7 +71,7 @@ async function handler(req: AuthorizedRequest, res: AuthorizedResponse) {
             { status: 400 }
           );
         }
-      } catch (e) {
+      } catch {
         return NextResponse.json(
           { message: "Couldn't find destination folder" },
           { status: 400 }
@@ -87,7 +87,7 @@ async function handler(req: AuthorizedRequest, res: AuthorizedResponse) {
         { status: 400 }
       );
     try {
-      const file = await mkdirSync(fullPath);
+      mkdirSync(fullPath);
       const dir = await new FileDBSchema(dirInfo).save();
       return NextResponse.json(dir, { status: 200 });
     } catch (error) {

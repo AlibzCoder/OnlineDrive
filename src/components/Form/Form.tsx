@@ -13,7 +13,7 @@ import {
 } from "@/util";
 import { FormProps } from "@/types";
 
-const Form = (props: FormProps, outerRef: ForwardedRef<any>) => {
+const Form = (props: FormProps, outerRef: ForwardedRef<HTMLFormElement>) => {
   const { children, inputNames, HandleSubmit, ...otherProps } = props;
   const ref = useRef<HTMLFormElement>(null);
   const submitRef = useRef<HTMLButtonElement>(null);
@@ -91,7 +91,7 @@ const Form = (props: FormProps, outerRef: ForwardedRef<any>) => {
     return true;
   }
 
-  function onSubmit(e: SubmitEvent | Event | any) {
+  function onSubmit(e: SubmitEvent | Event | React.FormEvent) {
     e.preventDefault();
     if (HandleSubmit && IsFunction(HandleSubmit))
       HandleSubmit(e, isValidForm(), getData());

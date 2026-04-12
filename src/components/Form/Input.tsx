@@ -11,7 +11,7 @@ import { useCustomEventListener } from "@/util/Hooks";
 import { InputProps } from "@/types";
 import Image from "next/image";
 
-const FormInput = (props: InputProps, outerRef: ForwardedRef<any>) => {
+const FormInput = (props: InputProps, outerRef: ForwardedRef<HTMLInputElement>) => {
   const ref = useRef<HTMLInputElement>(null);
   const validationTimer = useRef<number>(0);
   useImperativeHandle(outerRef, () => ref.current!, []);
@@ -22,7 +22,6 @@ const FormInput = (props: InputProps, outerRef: ForwardedRef<any>) => {
     placeHolder,
     name,
     legend,
-    info,
     validators,
     ignoreValidation = false,
     autoValidate = false,
@@ -33,7 +32,7 @@ const FormInput = (props: InputProps, outerRef: ForwardedRef<any>) => {
     required = false,
     ...otherProps
   } = props;
-  const [value, setValue] = useState<string | number | any>("");
+  const [value, setValue] = useState<string>("");
   const [error, setError] = useState<string>("");
 
   useCustomEventListener("form-submit", HandleValidation);
@@ -45,15 +44,17 @@ const FormInput = (props: InputProps, outerRef: ForwardedRef<any>) => {
         HandleValidation();
       }, 800);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [autoValidate, value]);
 
-  function ClearValue(_e: Event | any) {
+  function ClearValue() {
     if (IsDomElement(ref.current) && ref.current instanceof HTMLInputElement)
       ref.current.value = "";
     setValue("");
     OnChange({ target: ref.current });
   }
-  function OnFocus(e: Event | any) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  function OnFocus(e: any) {
     if (
       selectAllOnFocus &&
       IsDomElement(ref.current) &&
@@ -62,11 +63,13 @@ const FormInput = (props: InputProps, outerRef: ForwardedRef<any>) => {
       ref.current.select();
     if (HandleOnFocus && IsFunction(HandleOnFocus)) HandleOnFocus(e);
   }
-  function OnBlur(e: Event | any) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  function OnBlur(e: any) {
     if (HandleOnBlur && IsFunction(HandleOnBlur)) HandleOnBlur(e);
     HandleValidation();
   }
-  function OnChange(e: Event | any) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  function OnChange(e: any) {
     setValue(e.target.value);
     setError("");
     if (HandleOnChange && IsFunction(HandleOnChange)) HandleOnChange(e);

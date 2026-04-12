@@ -42,7 +42,7 @@ async function handler(req: AuthorizedRequest) {
           }
           await FileDBSchema.deleteOne({_id: file._id})
           return NextResponse.json({message : 'removed successfully'}, {status : 200});
-        }catch(e){
+        }catch{
           return NextResponse.json(INTERNAL_ERROR, { status: 500 });
         }
       }else{
@@ -51,13 +51,13 @@ async function handler(req: AuthorizedRequest) {
           { status: 400 }
         );
       }
-    } catch (e) {
+    } catch {
       return NextResponse.json(
         { message: "Couldn't find the File" },
         { status: 400 }
       );
     }
-  } catch (e) {
+  } catch {
     return NextResponse.json(INTERNAL_ERROR, { status: 500 });
   }
 }

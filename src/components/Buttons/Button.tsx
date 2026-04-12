@@ -7,6 +7,7 @@ import {
 } from "@/types";
 import Loader from "../Loader";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Button = (props: ButtonProps | LinkButtonProps | any) => {
   const {
     className,

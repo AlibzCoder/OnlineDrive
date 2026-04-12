@@ -1,6 +1,5 @@
-import mongoose, { connect, Connection, Mongoose } from "mongoose";
+import mongoose, { connect, Mongoose } from "mongoose";
 import { DB_CREDENTIALS } from "./const";
-import { IsArray } from "@/util";
 
 const DBConnect = (): Promise<Mongoose> => {
   const {
@@ -21,6 +20,7 @@ const DBConnect = (): Promise<Mongoose> => {
       }://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST_NAME}/${
         DB_ADDITIONALL_CONNECTION_STRING || DB_ADMIN_NAME
       }`;
+      console.log(connectionURI);
       const Client = await connect(connectionURI);
       if (DB_APP_NAME) Client.connection.useDb(DB_APP_NAME);
       res(Client);

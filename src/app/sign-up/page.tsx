@@ -5,7 +5,6 @@ import Button from "@/src/components/Buttons/Button";
 import LinkButton from "@/src/components/Buttons/LinkButton";
 import Form from "@/src/components/Form/Form";
 import Input from "@/src/components/Form/Input";
-import { ButtonTypes } from "@/types";
 import { IsDomElement, Validators } from "@/util";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
@@ -16,7 +15,8 @@ export default function SignUp() {
   const [isLoading, setIsLoading] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
 
-  function HandleSubmit(_e: Event | any, isValid: boolean, data: object | any) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  function HandleSubmit(_e: any, isValid: boolean, data: any) {
     if (isValid) {
       setIsLoading(true);
       callSignUp(data)

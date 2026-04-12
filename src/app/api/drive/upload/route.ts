@@ -1,17 +1,17 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import path from "path";
 import { writeFile } from "fs/promises";
-import { INVALID_FORMDATA_ERROR, UPLOAD_PATH } from "@/lib/const";
+import { INVALID_FORMDATA_ERROR } from "@/lib/const";
 import { getUserByAuthPayloadOrUserName } from "../../auth/util";
 import { AuthorizedRequest } from "@/types/api";
 import DBConnect from "@/lib/mongo";
-import mongoose, { Schema } from "mongoose";
+import mongoose from "mongoose";
 import { IsEmpty } from "@/util";
 import { GetUserDirectoryByIdOrName } from "@/util/upload";
 import FileDBSchema from "@/schemas/db/file";
 import { existsSync } from "fs";
 
-export const handler = async (req: AuthorizedRequest, res: NextResponse) => {
+const handler = async (req: AuthorizedRequest) => {
   try {
     await DBConnect();
 
@@ -77,7 +77,7 @@ export const handler = async (req: AuthorizedRequest, res: NextResponse) => {
               { status: 400 }
             );
           }
-        } catch (e) {
+        } catch {
           return NextResponse.json(
             { message: "Couldn't find destination folder" },
             { status: 400 }
@@ -101,11 +101,11 @@ export const handler = async (req: AuthorizedRequest, res: NextResponse) => {
         console.log("Error occured ", error);
         return NextResponse.json({ Message: "Failed", status: 500 });
       }
-    } catch (e) {
-      console.log("Error occured ", e);
+    } catch (error) {
+      console.log("Error occured ", error);
       return NextResponse.json(INVALID_FORMDATA_ERROR, { status: 400 });
     }
-  } catch (e) {
+  } catch {
     return NextResponse.json(INVALID_FORMDATA_ERROR, { status: 400 });
   }
 };

@@ -7,7 +7,9 @@ import { IsEmpty } from "@/util";
 import { RecurciveFileItem } from "@/types";
 
 export interface ExplorerState {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   visibleFiles: RecurciveFileItem[] | any[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   visibleFolders: RecurciveFileItem | any;
   currentExplorerRoute: RecurciveFileItem | null;
 }
@@ -43,7 +45,7 @@ export const removeFiles = createAction<PrepareAction<string>>(
   }
 )
 
-const IsArray = (o : any) => o && {}.toString.call(o) === "[object Array]";
+const IsArray = (o: unknown) => o && {}.toString.call(o) === "[object Array]";
 
 function recurciveUpdate (folder : RecurciveFileItem, newFolder: RecurciveFileItem) : RecurciveFileItem {
   if(folder && folder.children && IsArray(folder.children)){

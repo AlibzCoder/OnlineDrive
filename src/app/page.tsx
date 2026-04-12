@@ -1,4 +1,3 @@
-import Image from "next/image";
 import "@/src/styles/main-page.scss";
 import Header from "@/src/components/MainPage/Header";
 import Explorer from "@/src/components/MainPage/Explorer";

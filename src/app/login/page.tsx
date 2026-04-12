@@ -15,11 +15,13 @@ export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
 
+  /* eslint-disable @typescript-eslint/no-explicit-any */
   function HandleSubmit(
-    _e: Event | any,
+    _e: any,
     isValid: boolean,
-    data: object | any
+    data: any
   ) {
+  /* eslint-enable @typescript-eslint/no-explicit-any */
     if(isValid){
       setIsLoading(true);
       callLogin(data).then(()=>{

@@ -1,17 +1,14 @@
-import { extentionsIcons } from "@/lib/const";
-import { RecurciveFileItem } from "@/types";
-import { IsArray, IsDomElement, IsEmpty, Validators } from "@/util";
+import { IsDomElement, Validators } from "@/util";
 import { useAppDispatch, useAppSelector } from "@/util/Hooks";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Loader from "../../Loader";
 import NoFiles from "./NoFIles";
 import {
   CreateNewDirectory,
-  DeleteFile,
   GetFilesByDirectory,
   UploadFileToDirectory,
 } from "@/lib/api/explorer.api";
-import { removeFiles, setVisibleFiles } from "@/lib/store/slices/explorerSlice";
+import { setVisibleFiles } from "@/lib/store/slices/explorerSlice";
 import Modal from "../../Modal";
 import Button from "../../Buttons/Button";
 import LinkButton from "../../Buttons/LinkButton";
@@ -36,11 +33,13 @@ const ExplorerSideBar = () => {
   const [isUploadLoading, setIsUploadLoading] = useState(false);
   const UploadForm = useRef<HTMLFormElement>(null);
 
+  /* eslint-disable @typescript-eslint/no-explicit-any */
   function OnAddFolderFormSubmit(
-    _e: Event | any,
+    _e: any,
     isValid: boolean,
-    data: object | any
+    data: any
   ) {
+  /* eslint-enable @typescript-eslint/no-explicit-any */
     console.log(addToDirId);
     if (isValid && addToDirId) {
       setIsAddFolderLoading(true);
@@ -97,6 +96,7 @@ const ExplorerSideBar = () => {
     refetch().finally(() => {
       setIsLoadingRootFolder(false);
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -158,7 +158,7 @@ const ExplorerSideBar = () => {
             className="w-full"
           >
             <h4 className="mb-1">Adding Folder Under</h4>
-            <span className="ml-2">"root/Test/"</span>
+            <span className="ml-2">&quot;root/Test/&quot;</span>
             <Input
               type="text"
               name="name"
@@ -209,7 +209,7 @@ const ExplorerSideBar = () => {
             className="w-full"
           >
             <h4 className="mb-1">Adding File Under</h4>
-            <span className="ml-2">"root/Test/"</span>
+            <span className="ml-2">&quot;root/Test/&quot;</span>
             <SelectFile name="file" />
           </Form>
           <div

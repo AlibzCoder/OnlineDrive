@@ -15,11 +15,13 @@ const SideBarFileItem = ({
   }: {
     file: RecurciveFileItem;
     isRootFolder?: boolean;
-    addFolder?: (dirId: string | any) => void;
-    uploadFile?: (dirId: string | any) => void;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    addFolder?: (dirId: any) => void;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    uploadFile?: (dirId: any) => void;
   }) => {
     const dispatch = useAppDispatch();
-    const { dirId, name, extention, type, id, children } = file;
+    const { name, extention, type, id, children } = file;
     const visibleFiles = useAppSelector((state) => state.explorer.visibleFiles);
     const [isLoadingFolder, setIsLoadingFolder] = useState(false);
     const [isDeleting, setIsDeleting] = useState(false);
@@ -28,6 +30,7 @@ const SideBarFileItem = ({
       let ext = type === "file" ? `${extention}` : "folder";
       if (ext.charAt(0) === ".") ext = ext.substring(1, ext.length);
       return ext;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [extention]);
     const icon = extentionsIcons[cleanedExtention as keyof typeof extentionsIcons]
       ? extentionsIcons[cleanedExtention as keyof typeof extentionsIcons]
@@ -86,7 +89,7 @@ const SideBarFileItem = ({
               file={item}
             />
           ))}
-          {FilesList.map((item) => (
+          {FilesList.map((item: RecurciveFileItem) => (
             <SideBarFileItem key={item.id} file={item} />
           ))}
         </>
@@ -174,7 +177,7 @@ const SideBarFileItem = ({
                 file={item}
               />
             ))}
-            {FilesList.map((item) => (
+            {FilesList.map((item: RecurciveFileItem) => (
               <SideBarFileItem key={item.id} file={item} />
             ))}
             {isEmpty ? <NoFiles /> : <></>}

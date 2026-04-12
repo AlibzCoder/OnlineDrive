@@ -51,13 +51,13 @@ async function handler(req: AuthorizedRequest) {
         _dirs.push(FileDBDocToJson(file));
       });
       return NextResponse.json(_dirs, {status : 200});
-    } catch (e) {
+    } catch {
       return NextResponse.json(
         { message: "Couldn't find destination folder" },
         { status: 400 }
       );
     }
-  } catch (e) {
+  } catch {
     return NextResponse.json(INTERNAL_ERROR, { status: 500 });
   }
 }

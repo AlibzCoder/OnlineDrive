@@ -2,16 +2,18 @@ import { configureStore } from '@reduxjs/toolkit'
 import { ApiMiddleware, ApiReducer, ApiReducerPath } from '@/lib/api/createApiReducer';
 import explorerSlice from './slices/explorerSlice';
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export const makeStore = () => {
   return configureStore({
     reducer: {
       explorer: explorerSlice,
       [ApiReducerPath]: ApiReducer
     },
-    middleware: (getDefaultMiddleware) =>
+    middleware: (getDefaultMiddleware: any) =>
       getDefaultMiddleware().concat(ApiMiddleware),
-  })
+  } as any)
 }
+/* eslint-enable @typescript-eslint/no-explicit-any */
 
 // Infer the type of makeStore
 export type AppStore = ReturnType<typeof makeStore>
